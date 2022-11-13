@@ -14,4 +14,4 @@ test:
 		poetry run pytest
 
 test-cov:
-		poetry run pytest --cov=page_loader tests --cov-report xml
+		poetry run pytest --cov=page_loader --cov-report xml
