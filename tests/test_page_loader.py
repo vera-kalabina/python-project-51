@@ -3,6 +3,20 @@ import pytest
 from page_loader.download import download
 from page_loader import url
 
+URL = 'https://ru.hexlet.io'
+URL_IMG = 'https://ru.hexlet.io/professions/python.png'
+URL_CSS = 'https://ru.hexlet.io/assets/application.css'
+URL_JS = 'https://ru.hexlet.io/packs/js/runtime.js'
+
+RAW = 'tests/fixtures/raw.html'
+IMG = 'tests/fixtures/image.png'
+HTML = 'tests/fixtures/expected.html'
+CSS = 'tests/fixtures/styles.css'
+JS = 'tests/fixtures/script.js'
+
+DIRECTORY = 'ru-hexlet-io_files'
+EXPECTED_HTML = 'ru-hexlet-io.html'
+
 
 @pytest.mark.parametrize('link, expected', [
     (
@@ -18,7 +32,27 @@ from page_loader import url
         'ru-hexlet-io-professions-python.js'
     )
 ])
-def test_to_filename(link, expected):
+def test_make_file_name(link, expected):
 
-    actual = url.convert_name(link)
+    actual = url.make_file_name(link)
+    assert actual == expected
+
+
+@pytest.mark.parametrize('link, expected', [
+    (
+        'https://ru.hexlet.io',
+        'ru-hexlet-io_files'
+    ),
+    (
+        'https://hexlet.io',
+        'hexlet-io_files'
+    ),
+    (
+        'https://ru.hexlet.io/professions/python.js',
+        'ru-hexlet-io-professions-python_files'
+    )
+])
+def test_make_dir_name(link, expected):
+
+    actual = url.make_dir_name(link)
     assert actual == expected

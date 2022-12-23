@@ -7,10 +7,8 @@ import sys
 def main():
     args = cli.parse()
 
-    try:
-        download(args.url, args.output)
-    except Exception:
-        sys.exit(1)
+    download(args.url, args.output)
+
 
 
 if __name__ == '__main__':
