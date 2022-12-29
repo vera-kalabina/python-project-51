@@ -14,7 +14,7 @@ def convert_name(url):
     return new_name, extension
 
 
-def make_file_name(url):
+def make_filename(url):
     new_name, extension = convert_name(url)
     if extension:
         format = extension
@@ -23,7 +23,7 @@ def make_file_name(url):
     return f'{new_name}{format}'
 
 
-def make_dir_name(url):
+def make_dirname(url):
     new_name, extension = convert_name(url)
     file_extension = '_files'
     return f'{new_name}{file_extension}'
