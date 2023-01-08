@@ -24,6 +24,10 @@ def get_resources(response, link, dir_name):
         if content.startswith('http'):
             if urlparse(link).netloc == urlparse(content).netloc:
                 content_link = content
+            else:
+                log_error.error("Content wasn't downloaded "
+                                "as it's on a different host")
+                continue
         else:
             if not content.startswith('/'):
                 content = '/' + content

@@ -7,18 +7,32 @@ from page_loader.logger import log_info, log_error
 
 
 def download_link(url):
-    response = requests.get(url)
-    response.raise_for_status()
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as error:
+        log_error.error(error)
+        log_info.info(f'Failed.Check your internet connection or url:{url}')
+        raise Exception(error)
     return response
 
 
 def save_content(file_path, content):
-    if isinstance(content, bytes):
-        with open(file_path, 'wb+') as downloaded_file:
-            downloaded_file.write(content)
-    else:
-        with open(file_path, 'w') as downloaded_file:
-            downloaded_file.write(content)
+    try:
+        if isinstance(content, bytes):
+            with open(file_path, 'wb+') as downloaded_file:
+                downloaded_file.write(content)
+        else:
+            with open(file_path, 'w') as downloaded_file:
+                downloaded_file.write(content)
+    except PermissionError as error1:
+        log_error.error(error1)
+        log_info.info(f'Denied access to the file {file_path}')
+        raise Exception(error1)
+    except OSError as error2:
+        log_error.error(error2)
+        log_info.info(f'Unable to save to the file {file_path}')
+        raise Exception(error2)
 
 
 def download(link, actual_path=os.getcwd()):

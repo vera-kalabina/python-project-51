@@ -20,6 +20,7 @@ page-loader = "page_loader.scripts.page_loader:main"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^5.0.4"
+requests-mock = "^1.10.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
