@@ -116,7 +116,7 @@ def test_get_resources():
         m.get(URL, text=html_raw)
         response = download_link(URL)
         resources, processed_html = get_resources(response, URL, DIRECTORY)
-
+        assert processed_html == html_expected
         expected_resources = ['https://ru.hexlet.io/assets/application.css',
                               'https://ru.hexlet.io/professions/python.png',
                               'https://ru.hexlet.io/packs/js/runtime.js']

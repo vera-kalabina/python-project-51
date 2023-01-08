@@ -36,6 +36,6 @@ jobs:
           make test-cov
       - name: 'Send Reporter'
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.TEST_REPORTER_ID_3 }}
+          TEST_REPORTER_ID_3: ${{ secrets.TEST_REPORTER_ID_3 }}
         run: |
           ./cc-test-reporter after-build -r "$TEST_REPORTER_ID_3"

@@ -249,3 +249,12 @@
 2023-01-08 19:22:27:page-loader-error:4481:14 ERROR 
 2023-01-08 19:22:27:page-loader-error:4481:29 ERROR [Errno 13] Permission denied: '/tmp/tmphymaxcyw/ru-hexlet-io.html'
 2023-01-08 19:22:27:page-loader-error:4481:33 ERROR [Errno 2] No such file or directory: 'not_file/ru-hexlet-io.html'
+2023-01-08 19:28:33:page-loader-error:4527:28 ERROR Content wasn't downloaded as it's on a different host
+2023-01-08 19:28:33:page-loader-error:4527:28 ERROR Content wasn't downloaded as it's on a different host
+2023-01-08 19:28:33:page-loader-error:4527:22 ERROR Content not found
+2023-01-08 19:28:33:page-loader-error:4527:28 ERROR Content wasn't downloaded as it's on a different host
+2023-01-08 19:28:33:page-loader-error:4527:28 ERROR Content wasn't downloaded as it's on a different host
+2023-01-08 19:28:33:page-loader-error:4527:22 ERROR Content not found
+2023-01-08 19:28:33:page-loader-error:4527:14 ERROR 
+2023-01-08 19:28:33:page-loader-error:4527:29 ERROR [Errno 13] Permission denied: '/tmp/tmp3urxpsnt/ru-hexlet-io.html'
+2023-01-08 19:28:33:page-loader-error:4527:33 ERROR [Errno 2] No such file or directory: 'not_file/ru-hexlet-io.html'
