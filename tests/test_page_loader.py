@@ -6,7 +6,6 @@ from tempfile import TemporaryDirectory
 from requests.exceptions import Timeout, ConnectionError, HTTPError
 
 
-
 from page_loader.download import download, download_link
 from page_loader import url
 from page_loader.html import get_resources
@@ -27,6 +26,7 @@ EXPECTED_HTML = 'ru-hexlet-io.html'
 EXPECTED_IMG = os.path.join(DIRECTORY, 'ru-hexlet-io-professions-python.png')
 EXPECTED_CSS = os.path.join(DIRECTORY, 'ru-hexlet-io-assets-application.css')
 EXPECTED_JS = os.path.join(DIRECTORY, 'ru-hexlet-io-packs-js-runtime.js')
+
 
 def read(file, binary=False):
     if not binary:
@@ -91,19 +91,19 @@ def test_downloads():
         img_path = os.path.join(tmpdir, EXPECTED_IMG)
         css_path = os.path.join(tmpdir, EXPECTED_CSS)
         js_path = os.path.join(tmpdir, EXPECTED_JS)
-        
+
         actual_html = read(html_path)
         assert actual_html == html_expected
 
         actual_img = read(img_path, binary=True)
         assert actual_img == image
-        
+
         actual_css = read(css_path, binary=True)
         assert actual_css == css
 
         actual_js = read(js_path, binary=True)
         assert actual_js == js
-        
+
         actual_path = os.path.join(tmpdir, DIRECTORY)
         assert len(os.listdir(actual_path)) == 3
 
