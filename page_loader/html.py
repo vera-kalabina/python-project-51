@@ -28,7 +28,7 @@ def get_resources(response, link, dir_name):
                 content_link = attr_value
             else:
                 logging.debug(f"Content {attr_value} wasn't downloaded "
-                               "as it's on a different host")
+                              "as it's on a different host")
                 continue
         else:
             if not attr_value.startswith('/'):
