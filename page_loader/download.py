@@ -29,11 +29,11 @@ def save_content(file_path, content):
             with open(file_path, 'w') as downloaded_file:
                 downloaded_file.write(content)
     except PermissionError as error1:
-        logging.error(error1)
+        logging.debug(error1)
         logging.info(f'Denied access to the file {file_path}')
         raise Exception(error1)
     except OSError as error2:
-        logging.error(error2)
+        logging.debug(error2)
         logging.info(f'Unable to save to the file {file_path}')
         raise Exception(error2)
 
