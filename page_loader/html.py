@@ -1,37 +1,39 @@
 from bs4 import BeautifulSoup
 import os
-from page_loader.logger import log_error
+import logging
 
 
 from urllib.parse import urljoin, urlparse
 from page_loader import url
 
 
+TAGS_AND_ATTRIBUTES = {
+    'img': 'src',
+    'script': 'src',
+    'link': 'href',
+}
+
+
 def get_resources(response, link, dir_name):
-    TAGS_AND_ATTRIBUTES = {
-        'img': 'src',
-        'script': 'src',
-        'link': 'href',
-    }
     resources = []
     data = BeautifulSoup(response.text, 'html.parser')
-    for teg in data.find_all(TAGS_AND_ATTRIBUTES.keys()):
-        attribute = TAGS_AND_ATTRIBUTES.get(teg.name)
-        content = teg.get(attribute)
-        if content is None:
-            log_error.error('Content not found')
+    for tag in data.find_all(TAGS_AND_ATTRIBUTES.keys()):
+        attribute = TAGS_AND_ATTRIBUTES.get(tag.name)
+        attr_value = tag.get(attribute)
+        if attr_value is None:
+            logging.error(f'Content not found')
             continue
-        if content.startswith('http'):
-            if urlparse(link).netloc == urlparse(content).netloc:
-                content_link = content
+        if attr_value.startswith('http'):
+            if urlparse(link).netloc == urlparse(attr_value).netloc:
+                content_link = attr_value
             else:
-                log_error.error("Content wasn't downloaded "
-                                "as it's on a different host")
+                logging.error(f"Content {attr_value} wasn't downloaded "
+                              "as it's on a different host")
                 continue
         else:
-            if not content.startswith('/'):
-                content = '/' + content
-            content_link = urljoin(link, content)
+            if not attr_value.startswith('/'):
+                attr_value = '/' + attr_value
+            content_link = urljoin(link, attr_value)
         resources.append(content_link)
-        teg[attribute] = os.path.join(dir_name, url.make_filename(content_link))
+        tag[attribute] = os.path.join(dir_name, url.make_filename(content_link))
     return resources, data.prettify()

@@ -15,11 +15,13 @@ URL_IMG = 'https://ru.hexlet.io/professions/python.png'
 URL_CSS = 'https://ru.hexlet.io/assets/application.css'
 URL_JS = 'https://ru.hexlet.io/packs/js/runtime.js'
 
+
 RAW = 'tests/fixtures/raw.html'
 IMG = 'tests/fixtures/image.png'
 HTML = 'tests/fixtures/expected.html'
 CSS = 'tests/fixtures/styles.css'
 JS = 'tests/fixtures/script.js'
+
 
 DIRECTORY = 'ru-hexlet-io_files'
 EXPECTED_HTML = 'ru-hexlet-io.html'
@@ -133,11 +135,10 @@ def test_requests(errors):
             assert download(URL, tmpdir)
 
 
-def test_permissions_and_file_not_found():
-    with requests_mock.Mocker() as m, TemporaryDirectory() as tmpdir:
-        m.get(URL)
-        os.chmod(tmpdir, stat.S_IRUSR)
-        with pytest.raises(Exception) as permission_error:
-            assert download(URL, tmpdir) == permission_error
-        with pytest.raises(Exception) as file_not_found:
-            assert download(URL, 'not_file') == file_not_found
+def test_permissions_and_file_not_found(requests_mock, tmpdir):
+    requests_mock.get(URL)
+    os.chmod(tmpdir, stat.S_IRUSR)
+    with pytest.raises(Exception) as permission_error:
+        assert download(URL, tmpdir) == permission_error
+    with pytest.raises(Exception) as file_not_found:
+        assert download(URL, 'not_file') == file_not_found

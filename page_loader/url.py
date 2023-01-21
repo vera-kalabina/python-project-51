@@ -3,19 +3,19 @@ import re
 from urllib.parse import urlparse, urlunparse
 
 
-def convert_name(url):
+def get_new_name_and_extension(url):
     url_parts = list(urlparse(url))
     url_parts[0] = ''
     path, extension = os.path.splitext(url_parts[2])
     url_parts[2] = path
     url_without_scheme = urlunparse(url_parts)
-    new_name = replace_chars(url_without_scheme)
+    new_name = re.sub('[^a-z0-9A-Z]', '-', url_without_scheme)
     new_name = new_name.strip('-')
     return new_name, extension
 
 
 def make_filename(url):
-    new_name, extension = convert_name(url)
+    new_name, extension = get_new_name_and_extension(url)
     if extension:
         format = extension
     else:
@@ -24,11 +24,6 @@ def make_filename(url):
 
 
 def make_dirname(url):
-    new_name, extension = convert_name(url)
-    file_extension = '_files'
-    return f'{new_name}{file_extension}'
-
-
-def replace_chars(string):
-    result = re.sub('[^a-z0-9A-Z]', '-', string)
-    return result
+    new_name, extension = get_new_name_and_extension(url)
+    new_extension = '_files'
+    return f'{new_name}{new_extension}'
