@@ -27,8 +27,8 @@ def get_resources(response, link, dir_name):
             if urlparse(link).netloc == urlparse(attr_value).netloc:
                 content_link = attr_value
             else:
-                logging.error(f"Content {attr_value} wasn't downloaded "
-                              "as it's on a different host")
+                logging.debug(f"Content {attr_value} wasn't downloaded "
+                               "as it's on a different host")
                 continue
         else:
             if not attr_value.startswith('/'):
