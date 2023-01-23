@@ -2,9 +2,11 @@ from bs4 import BeautifulSoup
 import os
 import logging
 
-
 from urllib.parse import urljoin, urlparse
 from page_loader import url
+
+
+logging.basicConfig(level=logging.INFO)
 
 
 TAGS_AND_ATTRIBUTES = {

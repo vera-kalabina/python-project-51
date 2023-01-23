@@ -1,5 +1,7 @@
 from page_loader import download
 from page_loader import cli
+import logging
+logging.basicConfig(level=logging.INFO)
 
 
 def main():
