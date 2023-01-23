@@ -23,7 +23,7 @@ def get_resources(response, link, dir_name):
         attribute = TAGS_AND_ATTRIBUTES.get(tag.name)
         attr_value = tag.get(attribute)
         if attr_value is None:
-            logging.info('Content not found')
+            logging.error('Content not found')
             continue
         if attr_value.startswith('http'):
             if urlparse(link).netloc == urlparse(attr_value).netloc:
